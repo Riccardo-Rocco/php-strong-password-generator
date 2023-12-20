@@ -1,3 +1,12 @@
+<?php
+include_once 'function.php';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $passwordLength = $_POST["passwordLength"];
+    $password = generatePassword($passwordLength);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -10,20 +19,9 @@
 <body>
     <div class="container mt-5">
         <h2 class="mb-4">Risultato Password</h2>
-        <?php
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $passwordLength = $_POST["passwordLength"];
-
-            // Logica di generazione password
-            $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+[]{}|;:,.<>?';
-            $password = '';
-            for ($i = 0; $i < $passwordLength; $i++) {
-                $password .= $characters[rand(0, strlen($characters) - 1)];
-            }
-        }
-        ?>
         <?php if(isset($password)): ?>
             <p>La tua password generata è: <?php echo $password; ?></p>
+            <p><a href="form.php" class="btn btn-secondary">Genera un'altra password</a></p>
         <?php endif; ?>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
